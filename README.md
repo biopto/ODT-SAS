@@ -13,7 +13,6 @@ ODT-SAS is a new semi-automatic method that uses conventional approaches (not ba
 - Spot: A Linear-Operator Toolbox (Version 1.2 or later: [Spot Toolbox](http://www.cs.ubc.ca/labs/scl/spot))
 
 ### INSTRUCTION
-## Instruction
 1. Download the repository
 2. Download MATLAB Toolboxes indicated in the requirements and move them to the "ASTRA Tool" folder
 3. Run ODT_SAS.m file
