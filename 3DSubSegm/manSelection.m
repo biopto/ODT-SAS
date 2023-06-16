@@ -2,7 +2,7 @@
 % Contact: michal.ziemczonok.dokt@pw.edu.pl, martyna.mazur.dokt@pw.edu.pl
 % Affiliation: Warsaw University of Technology, Institute of Micromechanics and Photonics
 
-function f=visv3(REC,seedAut,REC2,scale)
+function f = manSelection(REC,seedAut,REC2,scale)
 %input parsing - allow calls with any combination of arguments
 if nargin == 1
     REC2 = [];

@@ -220,6 +220,8 @@ maskNucl = ismember(wsREC, idx);
 %% Lipid structures segmentation 
 if LS == 1
     %Remove background and nucleoli from analysis
+    maskedREC = REC;
+    maskedREC(~maskCell) = 0;
     limitedArea = maskedREC;
     limitedArea(limitedArea == 0) = n_imm;
     limitedArea(maskNucl) = n_imm;
