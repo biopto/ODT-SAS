@@ -100,25 +100,26 @@ if ~isempty(cellFragm) && ((length(cellFragm) >= 1 && length(A) >= 1) || (length
     fragmPairs(~ismember(fragmPairs,cellFragm)) = 0;
     fragmPairs = fragmPairs(all(fragmPairs,2),:);
     clear index
-    
-    for i = 1:size(pairs,1)
-        fragmPairs(i,3) = volumeCell.Volume(double(fragmPairs(i,1)));
+    if ~isempty(fragmPairs)
+        for i = 1:size(fragmPairs,1)
+            fragmPairs(i,3) = volumeCell.Volume(double(fragmPairs(i,1)));
+        end
+           
+        fragmPairs = sortrows(fragmPairs,3,'descend');
+        fragmPairs(:,3) = [];
+        
+        n = 1;
+        n2 = 0;
+        while n2 ~= size(fragmPairs,1)
+            fragm1 = fragmPairs(n,1);
+            n2 = n2 + size(find(fragmPairs(:,1)==fragm1),1); 
+            sortPairs = ismember(cellFragm(:,1),fragmPairs(n:n2,2)).*cellFragm(:,1);
+            sortPairs(sortPairs==0) = [];
+            fragmPairs(n:n2,2) = sortPairs;
+            n = n2+1;
+        end
+        clear fragm1   
     end
-       
-    fragmPairs = sortrows(fragmPairs,3,'descend');
-    fragmPairs(:,3) = [];
-    
-    n = 1;
-    n2 = 0;
-    while n2 ~= size(fragmPairs,1)
-        fragm1 = fragmPairs(n,1);
-        n2 = n2 + size(find(fragmPairs(:,1)==fragm1),1); 
-        sortPairs = ismember(cellFragm(:,1),fragmPairs(n:n2,2)).*cellFragm(:,1);
-        sortPairs(sortPairs==0) = [];
-        fragmPairs(n:n2,2) = sortPairs;
-        n = n2+1;
-    end
-    clear fragm1   
 
     %MERGE FRAGMENTS OF BIOLOGICAL CELL
 
@@ -243,15 +244,20 @@ for i = 2:1:max(wsREC(:))
     wsREC(ismember(wsREC,i)) = n;  
 end
 
-object = 2:1:max(wsREC(:));
-mask = ismember(wsREC,object);
-mask = imdilate(mask, strel('sphere',4));
+wsREC = imdilate(wsREC, strel('sphere',4));
 
-for i = 1:size(mask,3)
-    mask(:,:,i) = imfill(mask(:,:,i),'holes');
+for i = 1:size(wsREC,3)
+    wsREC(:,:,i) = imfill(wsREC(:,:,i),'holes');
 end
-mask = imerode(mask, strel('sphere',4));
-mask = imerode(mask, strel('disk',1));
+wsREC = imerode(wsREC, strel('sphere',4));
+wsREC = imerode(wsREC, strel('disk',1));
+
+object = 2:1:max(wsREC(:));
+mask = cell(size(object))';
+
+for l = 1:size(object,2)
+    mask{l} = ismember(wsREC,object(l));
+end
 
 cellCount = numel(object);
 
