@@ -44,7 +44,7 @@ switch type
     case 'Cell' 
        [maskCell, cellCount] = W3DRBM(REC, n_imm, dx, thresh, option, strel_size, noiseVolume, noiseVolume2, thinFragments, cellThresh);
         temp_MC = zeros(size(maskCell{1}));
-        for i=1:size(mask,1)
+        for i=1:size(maskCell,1)
             temp_MC = temp_MC + maskCell{i};
         end
         masked = REC.*temp_MC;
