@@ -11,7 +11,7 @@ addpath(genpath(path));
 % 'Cell_Organelle';       %3D segmentation - cell + organelle
 
 
-type = 'Organelle';
+type = 'Cell_Organelle';
 
 
 %% Load files
