@@ -2,6 +2,11 @@ function maskSub = segmSubs(REC, maskCell, cellCount, x_tv, n_imm, dx, LS)
 
 %% Seed Points detection
 %% AUTOMATIC DETECTION
+temp_MC = zeros(size(maskCell{1}));
+for i=1:size(mask,1)
+    temp_MC = temp_MC + maskCell{i};
+end
+maskCell = temp_MC;
 masked = x_tv;
 masked(~maskCell) = 0;
 
