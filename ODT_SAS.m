@@ -55,7 +55,7 @@ switch type
     case 'Organelle'
         [mask,Path] = uigetfile('*.mat','Select cell mask');
         fileName = fullfile(Path,mask);
-        maskCell = load(fileName);
+        load(fileName);
         
         x_tv = generate_xtv(REC, n_imm, rayXY, 0.004);
         x_tv = ndresize(x_tv, size(REC), 'linear');
