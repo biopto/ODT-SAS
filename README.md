@@ -18,3 +18,9 @@ ODT-SAS is a new semi-automatic method that uses conventional approaches (not ba
 3. Run ODT_SAS.m file
 
 _Before running ODT_SAS.m, please read **Code instruction**_
+
+### CITATION
+If you find the work useful, please cite the following paper:
+
+M. Mazur and W. Krauze, ["Volumetric segmentation of biological cells and subcellular structures for optical diffraction tomography images"](https://doi.org/10.1364/BOE.498275), Biomed. Opt. Express  14, 5022-5035 (2023).
+
